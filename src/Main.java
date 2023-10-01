@@ -1,17 +1,41 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args) throws IOException {
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        String param = "name";
+        String paramValue = "toronto";
+        URL url = new URL("https://api.api-ninjas.com/v1/city" + "?" + param + "=" + paramValue);
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        String header = "X-Api-Key";
+        String headerValue = "oR3xqD6tjXLUiFvgGcbulraYxWZH4JByHqYSOiNE";
+        con.setRequestProperty(header, headerValue);
+
+        int responseCode = con.getResponseCode();
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader reader;
+        if (responseCode >= 200 && responseCode < 300) {
+            reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        } else {
+            reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
         }
+
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = reader.readLine()) != null) {
+            response.append(inputLine);
+        }
+        reader.close();
+
+        System.out.println("Error response: " + response.toString());
     }
 }
