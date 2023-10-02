@@ -23,8 +23,8 @@ The "human vs. human" mode would basically obtain a similar structure, but a cha
 4. The following link is to the documentation for the google maps API we are exploring to use: https://developers.google.com/maps/documentation/embed/get-started
 
 ### Example Usage of API
-1. Using hoppscotch.io, this is the api call.
-    ![img_1.png](img_1.png)
+1. Using hoppscotch.io, this is an image of the api result we get.
+    ![api.png](api.png)
 ### Example Output of an API Call
 1. The output for the City API call would be something like a city's population.
 2. The  output for the Google maps API call would be a streetview image.
